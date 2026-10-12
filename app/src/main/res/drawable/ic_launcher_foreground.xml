@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Cinema Screen Outer Gold Frame -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M31,33 C27.5,33 25,35.5 25,39 L25,69 C25,72.5 27.5,75 31,75 L77,75 C80.5,75 83,72.5 83,69 L83,39 C83,35.5 80.5,33 77,33 Z M79,69 C79,70.1 78.1,71 77,71 L31,71 C29.9,71 29,70.1 29,69 L29,39 C29,37.9 29.9,37 31,37 L77,37 C78.1,37 79,37.9 79,39 Z" />
+    
+    <!-- Bold Gold Play Icon in Center -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M49,46 L65,54 L49,62 Z" />
+    
+    <!-- Top Party Antenna / Broadcast Beacon -->
+    <path
+        android:fillColor="#48CAE4"
+        android:pathData="M54,23 A4,4 0,1,1 53.99,23 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M52.5,27 L55.5,27 L55.5,33 L52.5,33 Z" />
+    
+    <!-- Floating Broadcast / Audio Waves -->
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:pathData="M43,26 C46.5,23.5 50,22 54,22 C58,22 61.5,23.5 65,26" />
+    <path
+        android:strokeColor="#48CAE4"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M38,22 C42.8,18.5 48.2,17 54,17 C59.8,17 65.2,18.5 70,22" />
+
+    <!-- Screen Stand Base -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M44,77 L64,77 L66,81 L42,81 Z" />
+    <path
+        android:fillColor="#E0A96D"
+        android:pathData="M52,75 L56,75 L56,77 L52,77 Z" />
+</vector>

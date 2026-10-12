@@ -1,0 +1,115 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authenticated user profile for Mehfil Play",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "User UID" },
+        "displayName": { "type": "string", "description": "Display name of user" },
+        "email": { "type": "string", "description": "User email address" },
+        "photoUrl": { "type": "string", "description": "User avatar photo URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when account profile was created" },
+        "lastSeen": { "type": "string", "format": "date-time", "description": "Timestamp when account was last active" }
+      },
+      "required": ["id", "displayName", "email"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Watch party room instance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Room ID" },
+        "roomCode": { "type": "string", "description": "Unique 6-character room code" },
+        "roomName": { "type": "string", "description": "Room title/topic" },
+        "hostUid": { "type": "string", "description": "UID of the room host" },
+        "hostName": { "type": "string", "description": "Name of the host" },
+        "hostAvatar": { "type": "string", "description": "Host avatar URL" },
+        "currentUrl": { "type": "string", "description": "Currently loaded URL or video link" },
+        "currentTitle": { "type": "string", "description": "Title of current video or webpage" },
+        "videoId": { "type": "string", "description": "YouTube video ID if applicable" },
+        "isPlaying": { "type": "boolean", "description": "Whether video playback is active" },
+        "playbackPositionMs": { "type": "integer", "description": "Current playback position in milliseconds" },
+        "lastPlaybackUpdated": { "type": "string", "format": "date-time", "description": "Timestamp when playback state was updated" },
+        "hostCameraActive": { "type": "boolean", "description": "Whether host camera video is turned on" },
+        "hostMicActive": { "type": "boolean", "description": "Whether host mic is unmuted" },
+        "hostMuteAll": { "type": "boolean", "description": "Whether host has muted all participants" },
+        "allowUnmute": { "type": "boolean", "description": "Whether participants are allowed to unmute themselves" },
+        "sharedBrowserActive": { "type": "boolean", "description": "Whether shared browser view is selected" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Room creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Room last update timestamp" }
+      },
+      "required": ["id", "roomCode", "roomName", "hostUid", "hostName"]
+    },
+    "Participant": {
+      "title": "Participant",
+      "description": "Watch party room member",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Participant UID" },
+        "roomId": { "type": "string", "description": "Parent room ID" },
+        "displayName": { "type": "string", "description": "Participant display name" },
+        "photoUrl": { "type": "string", "description": "Participant avatar URL" },
+        "isHost": { "type": "boolean", "description": "True if participant is host" },
+        "isMicMuted": { "type": "boolean", "description": "True if participant's mic is muted" },
+        "isSpeaking": { "type": "boolean", "description": "True if participant is speaking right now" },
+        "isHostMuted": { "type": "boolean", "description": "True if host force-muted this participant" },
+        "joinedAt": { "type": "string", "format": "date-time", "description": "When participant joined" },
+        "lastSeen": { "type": "string", "format": "date-time", "description": "Heartbeat timestamp" }
+      },
+      "required": ["id", "roomId", "displayName"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Real-time room chat message",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Message ID" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "senderUid": { "type": "string", "description": "Sender user ID" },
+        "senderName": { "type": "string", "description": "Sender display name" },
+        "senderAvatar": { "type": "string", "description": "Sender avatar URL" },
+        "text": { "type": "string", "description": "Message text content" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Sent timestamp" }
+      },
+      "required": ["id", "roomId", "senderUid", "senderName", "text"]
+    },
+    "Signal": {
+      "title": "Signal",
+      "description": "WebRTC and audio signaling message for peer connections",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Signal ID" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "fromUid": { "type": "string", "description": "Sender UID" },
+        "toUid": { "type": "string", "description": "Recipient UID or 'all'" },
+        "type": { "type": "string", "description": "Signal type: offer, answer, candidate, ping" },
+        "payload": { "type": "string", "description": "Serialized SDP or ICE payload" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Sent timestamp" }
+      },
+      "required": ["id", "roomId", "fromUid", "toUid", "type", "payload"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/rooms/{roomId}": {
+      "schema": { "$ref": "#/entities/Room" },
+      "description": "Watch party room metadata and shared state"
+    },
+    "/rooms/{roomId}/participants/{participantId}": {
+      "schema": { "$ref": "#/entities/Participant" },
+      "description": "Participants in the room"
+    },
+    "/rooms/{roomId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Chat messages in the room"
+    },
+    "/rooms/{roomId}/signals/{signalId}": {
+      "schema": { "$ref": "#/entities/Signal" },
+      "description": "WebRTC and voice signaling"
+    }
+  }
+}

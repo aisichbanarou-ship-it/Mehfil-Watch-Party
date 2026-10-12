@@ -1,0 +1,6 @@
+{
+  "name": "Mehfil Play",
+  "description": "Watch party app with shared video playback, in-app browser, host camera, and voice chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
